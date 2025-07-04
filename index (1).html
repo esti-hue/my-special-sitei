@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Something Special</title>
+  <style>
+    body {
+      font-family: 'Arial';
+      background: #ff33b2;
+      color: #3333FF;
+      text-align: center;
+      padding: 50px;
+    }
+    #buttonArea {
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #finalBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="message">Hello.</h1>
+
+  <div id="buttonArea">
+    <button onclick="handleResponse()">Hello</button>
+  </div>
+
+  <button id="finalBtn" onclick="showFinalPage()">Tap below</button>
+
+  <script>
+    const messages = [
+      "Do you want to play a game?",
+      "Great, I'm going to rank some things. If they apply to you, continue.",
+      "I ke floket shume te gjata dhe trauma jote eshte prerja e flokeve tend.",
+      "S'te pelqejn kastravecat sepse te duket sikur po han uje.",
+      "Gjeja jote e preferuar eshte qe te zgjohesh ne oren 1 nga gjumi, qe te rrish kot dhe te hash buke.",
+      "Syt jane gjeja qe ti pelqen me shume te nje person tjeter.",
+      "Akulloren e ke qef me yogurt dhe pistachio.",
+      "Mos ndoshta je gjithmone serjoze ne rruge, je e zgjuar e forte dhe e bukur si princeshe?",
+      "Do these things apply to you?",
+      "Then you should continue on this website and you should tap the button below."
+    ];
+
+    let step = -1;
+
+    function handleResponse() {
+      step++;
+      
+      // Shfaq mesazhin aktual
+      if (step < messages.length) {
+        document.getElementById("message").innerText = messages[step];
+      }
+
+      updateButtons();
+    }
+
+    function updateButtons() {
+      const buttonArea = document.getElementById("buttonArea");
+      buttonArea.innerHTML = "";
+
+      if (step < messages.length - 1) {
+        // Për të gjitha mesazhet (përveç fundit)
+        buttonArea.innerHTML = `
+          <button onclick="handleResponse()">Yes</button>
+          <button onclick="handleResponse()">No</button>
+        `;
+      } else {
+        // Për mesazhin e fundit: shfaq butonin përfundimtar
+        document.getElementById("message").innerText = "Tap below";
+        buttonArea.style.display = "none";
+        document.getElementById("finalBtn").style.display = "inline-block";
+      }
+    }
+
+    function showFinalPage() {
+      document.body.innerHTML = `
+        <div style="text-align: center; padding: 50px;">
+          <img src="https://m.media-amazon.com/images/I/71ukz00iduL._AC_SL1500_.jpg"
+               alt="Cute Image"
+               style="width: 200px; max-width: 90%; border-radius: 10px; margin-bottom: 30px;">
+          <h1>A mund te bejme nje xhiro bashke?</h1>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
